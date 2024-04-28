@@ -1,0 +1,7 @@
+{
+    "eslint.options": {},
+    "eslint.workingDirectories": [
+            "./rp-next", 
+            "./rp-nest"
+    ]
+}
