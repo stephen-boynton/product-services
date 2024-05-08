@@ -28,7 +28,7 @@ services:
     volumes:
       - ./rp-go/:/app
     ports:
-      - "8000:8080"
+      - "8000:8000"
 
   rp-nest:
     build:
