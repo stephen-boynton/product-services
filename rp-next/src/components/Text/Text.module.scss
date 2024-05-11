@@ -1,0 +1,24 @@
+.display {
+  @include display-font;
+  color: $color-text;
+}
+
+.order1 {
+  @include order-1-font;
+  color: $color-text;
+}
+
+.order2 {
+  @include order-2-font;
+  color: $color-text;
+}
+
+.copy1 {
+  @include copy-1-font;
+  color: $color-text;
+}
+
+.copy2 {
+  @include copy-2-font;
+  color: $color-text-secondary;
+}
