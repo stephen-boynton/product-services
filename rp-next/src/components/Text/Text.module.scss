@@ -1,24 +1,24 @@
 .display {
   @include display-font;
-  color: $color-text;
+  color: inherit;
 }
 
 .order1 {
   @include order-1-font;
-  color: $color-text;
+  color: inherit;
 }
 
 .order2 {
   @include order-2-font;
-  color: $color-text;
+  color: inherit;
 }
 
 .copy1 {
   @include copy-1-font;
-  color: $color-text;
+  color: inherit;
 }
 
 .copy2 {
   @include copy-2-font;
-  color: $color-text-secondary;
+  color: inherit;
 }

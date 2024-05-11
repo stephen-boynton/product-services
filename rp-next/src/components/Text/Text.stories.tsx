@@ -2,7 +2,7 @@ import { Text } from '.'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'Form/Text',
+  title: 'Base Components/Text',
   component: Text,
   argTypes: {
     as: {

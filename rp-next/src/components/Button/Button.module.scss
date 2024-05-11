@@ -1,0 +1,29 @@
+.baseStyles {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.primary {
+  @extend .baseStyles;
+  color: $color-light;
+  background-color: $color-primary;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.secondary {
+  @extend .baseStyles;
+  color: $color-primary;
+  border: $color-primary 2px solid;
+  background-color: $color-light;
+
+  &:hover {
+    opacity: 0.8;
+    color: $color-light;
+    background-color: $color-primary;
+  }
+}
