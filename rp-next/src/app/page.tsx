@@ -1,6 +1,6 @@
 'use client'
-import styles from './page.module.css'
-import Form from '@/components/Form'
+import styles from './page.module.scss'
+import { Form } from '@/components/Form'
 
 const MY_INPUTS = [
   { type: 'text', name: 'first name', label: 'first name' },

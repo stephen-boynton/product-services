@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import path from 'path'
 const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     // Find the rule that handles SCSS
@@ -14,7 +15,7 @@ const nextConfig = {
               u.options = {}
             }
             // Prepend the variables to each sass/scss file
-            u.options.additionalData = `@import "${path.resolve(__dirname, 'styles/_variables.scss')}";`
+            u.options.additionalData = `@import "./src/styles/_variables.scss";`
           }
         })
       }

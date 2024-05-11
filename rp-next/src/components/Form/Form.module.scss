@@ -1,6 +1,7 @@
 .form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 100%;
     max-width: 400px;
     min-height: 300px;
@@ -25,14 +26,7 @@
         }
     }
 
-    >button {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-        align-self: flex-end;
-        justify-self: flex-end;
+    >:not(:last-child) {
+        margin-bottom: 2rem;
     }
 }
