@@ -1,0 +1,24 @@
+// text input styles
+.baseStyles {
+  @include copy-1-font;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  border-color: $color-dark;
+  cursor: text;
+}
+
+.primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  >input {
+    @extend .baseStyles;
+  }
+
+  >label {
+    @include copy-1-font;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
