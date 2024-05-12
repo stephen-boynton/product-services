@@ -1,6 +1,8 @@
 version: '3.8'
 services:
   rp-next:
+    profiles:
+      - frontend
     build:
       context: ./rp-next
       dockerfile: Dockerfile
@@ -11,6 +13,8 @@ services:
       - "3000:3000"
 
   rp-python:
+    profiles:
+      - python
     build:
       context: ./rp-python
       dockerfile: Dockerfile
@@ -22,6 +26,8 @@ services:
       - FLASK_ENV=development
 
   rp-go:
+    profiles:
+      - gateway
     build:
       context: ./rp-go
       dockerfile: Dockerfile
@@ -30,7 +36,28 @@ services:
     ports:
       - "8000:8000"
 
+  postgres:
+    profiles:
+      - db
+      - auth
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: odin
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    healthcheck:
+        interval: 1s
+        retries: 10
+        test: ["CMD", "pg_isready", "-U", "admin", "-d", "odin"]
+    ports: 
+      - "5432:5432"
+
   rp-nest:
+    depends_on:
+      - postgres
+    profiles:
+      - auth
     build:
       context: ./rp-nest
       dockerfile: Dockerfile
@@ -40,19 +67,9 @@ services:
     ports:
       - "3001:3001"
 
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: example
-    healthcheck:
-        interval: 1s
-        retries: 10
-        test: ["CMD", "pg_isready", "-U", "postgres"]
-    ports: 
-      - "5432:5432"
-
   rabbitmq:
+    profiles:
+      - message
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:

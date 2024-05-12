@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["nest", "start", "--watch"]
+CMD ["npm", "run", "dev"]
