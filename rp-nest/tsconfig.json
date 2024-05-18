@@ -16,6 +16,9 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "incremental": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true
   }
 }
