@@ -39,7 +39,6 @@ services:
   postgres:
     profiles:
       - db
-      - auth
     image: postgres
     restart: always
     environment:
@@ -53,9 +52,22 @@ services:
     ports: 
       - "5432:5432"
 
+  mongodb:
+    image: mongo:6-jammy
+    restart: always
+    profiles:
+      - auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - '27017:27017'
+    networks:
+      - node-network
+
   rp-nest:
     depends_on:
-      - postgres
+      - mongodb
     profiles:
       - auth
     build:
@@ -63,9 +75,10 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./rp-nest:/usr/src/app
-      - /usr/src/app/node_modules
     ports:
       - "3001:3001"
+    networks:
+      - node-network
 
   rabbitmq:
     profiles:
@@ -83,4 +96,6 @@ services:
 
 networks:
   rabbitmq_net:
+    driver: bridge
+  node-network:
     driver: bridge

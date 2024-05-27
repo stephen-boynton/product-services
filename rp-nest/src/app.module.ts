@@ -1,26 +1,15 @@
 import { Module } from '@nestjs/common'
+import { AuthModule } from './auth/auth.module'
+import { ConfigModule } from '@nestjs/config'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { TypeOrmModule } from '@nestjs/typeorm'
-import { ConfigModule } from '@nestjs/config'
-import { OauthModule } from './oauth/oauth.module'
-import { OidcProviderModule } from './oidc/oidc-provider.module'
+import { TestModule } from './test/test.module'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'postgres',
-      port: 5432,
-      username: 'admin',
-      password: 'admin',
-      database: 'postgres',
-      autoLoadEntities: true,
-      synchronize: true
-    }),
-    OauthModule,
-    OidcProviderModule
+    ConfigModule.forRoot(), // so that we can pull in config
+    AuthModule,
+    TestModule
   ],
   controllers: [AppController],
   providers: [AppService]

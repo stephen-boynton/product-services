@@ -6,7 +6,7 @@ COPY package*.json ./
 COPY node_modules ./node_modules
 RUN npm install
 RUN npm install @nestjs/cli -g
-COPY . .
+COPY ./src .
 
 EXPOSE 3001
 
