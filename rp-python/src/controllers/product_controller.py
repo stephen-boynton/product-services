@@ -1,6 +1,4 @@
-from flask import request, jsonify
-from typing import Optional, Union
-from marshmallow import Schema, fields, ValidationError
+from typing import Optional
 import json
 import os
 
@@ -12,12 +10,12 @@ with open(json_file_path, 'r') as json_file:
 
 class ProductController:
     # Public methods
-    @classmethod
-    def get_all_products(self, filters: dict) -> list[dict]:        
+    @staticmethod
+    def get_all_products(filters: dict) -> list[dict]:        
         return_data = products_data
         is_sale = filters.get('is_sale')
         if is_sale is not None:
-            return_data = self.__get_products_by_sale(is_sale)
+            return_data = ProductController.__get_products_by_sale(is_sale)
 
         return return_data
 
