@@ -39,8 +39,6 @@ class ProductController:
         if is_sale is not None:
             return_data = ProductController.__get_products_by_sale(is_sale)
             
-
-            
         if limit is not None:
             return_data = return_data[:limit]
 
