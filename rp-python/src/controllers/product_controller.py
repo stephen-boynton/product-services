@@ -1,6 +1,7 @@
 from typing import Optional
 import json
 import os
+import uuid
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_file_path = os.path.join(current_dir, '..', 'data', 'products.json')
@@ -14,8 +15,17 @@ class ProductController:
     def get_all_products(filters: dict) -> list[dict]:        
         return_data = products_data
         is_sale = filters.get('is_sale')
+        sort = filters.get('sort')
+        limit = filters.get('limit')
+
         if is_sale is not None:
             return_data = ProductController.__get_products_by_sale(is_sale)
+            
+        if sort is not None:
+            return_data.sort(key=lambda x: x[sort])
+            
+        if limit is not None:
+            return_data = return_data[:limit]
 
         return return_data
 
@@ -33,6 +43,20 @@ class ProductController:
                 products_data.remove(product)
                 return product
         return None
+    
+    @staticmethod
+    def patch_product_by_id(product_id: str, product_data: dict) -> Optional[dict]:
+        for product in products_data:
+            if product['id'] == product_id:
+                product.update(product_data)
+                return product
+        return None
+    
+    @staticmethod
+    def post_product(product_data: dict) -> dict:
+        product_data['id'] = uuid.uuid4().hex
+        products_data.append(product_data)
+        return product_data
     
     
 
