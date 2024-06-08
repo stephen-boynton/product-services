@@ -17,12 +17,29 @@ class ProductController:
         is_sale = filters.get('is_sale')
         sort = filters.get('sort')
         limit = filters.get('limit')
+        page = filters.get('page')
+        page_size = filters.get('page_size')
+        sort_order = filters.get('sort_order')
+        query = filters.get('query')
+        
+        if query is not None:
+            return_data = [product for product in return_data if query.lower() in product['product'].lower()]
+        
+        if sort is not None:
+            if sort_order == 'desc':
+                return_data.sort(key=lambda x: x[sort], reverse=True)
+            else:
+                return_data.sort(key=lambda x: x[sort])
+        
+        if page is not None and page_size is not None:
+            start = (page - 1) * page_size
+            end = start + page_size
+            return_data = return_data[start:end]
 
         if is_sale is not None:
             return_data = ProductController.__get_products_by_sale(is_sale)
             
-        if sort is not None:
-            return_data.sort(key=lambda x: x[sort])
+
             
         if limit is not None:
             return_data = return_data[:limit]

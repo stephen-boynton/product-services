@@ -1,5 +1,5 @@
 from typing import Optional
-from marshmallow import Schema, fields, ValidationError, validate
+from marshmallow import Schema, fields, ValidationError, validate, validates_schema
 from datetime import datetime
 
 sortable_fields: list[str] = [
@@ -16,6 +16,18 @@ class ProductFilterSchema(Schema):
     is_sale = fields.Boolean()
     limit = fields.Integer()
     sort = fields.String(validate=validate.OneOf(sortable_fields))
+    sort_order = fields.String(validate=validate.OneOf(['asc', 'desc']))
+    page = fields.Integer()
+    page_size = fields.Integer()
+    query = fields.String()
+    
+    
+    @validates_schema
+    def validate(self, data, **kwargs):
+        if 'page' in data and 'page_size' not in data:
+            raise ValidationError('page_size is required when page is present.')
+        if 'page_size' in data and 'page' not in data:
+            raise ValidationError('page is required when page_size is present.')
     
 class ProductPostSchema(Schema):
     description = fields.String(required=True)
