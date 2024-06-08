@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 import path from 'path'
 const nextConfig = {
+  images: {
+    domains: ['dummyimage.com']
+  },
   webpack: (config, { dev, isServer }) => {
     // Find the rule that handles SCSS
     const rules = config.module.rules.find((rule) =>

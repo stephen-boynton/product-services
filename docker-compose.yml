@@ -3,6 +3,9 @@ services:
   rp-next:
     profiles:
       - frontend
+      - fullstack
+    depends_on:
+      - rp-python
     build:
       context: ./rp-next
       dockerfile: Dockerfile
@@ -11,10 +14,14 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
+    networks:
+      - fullstack-network
+
 
   rp-python:
     profiles:
       - python
+      - fullstack
     build:
       context: ./rp-python
       dockerfile: Dockerfile
@@ -24,6 +31,8 @@ services:
       - "5000:5000"
     environment:
       - FLASK_ENV=development
+    networks:
+      - fullstack-network
 
   rp-go:
     profiles:
@@ -98,4 +107,6 @@ networks:
   rabbitmq_net:
     driver: bridge
   node-network:
+    driver: bridge
+  fullstack-network:
     driver: bridge
