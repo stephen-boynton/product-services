@@ -1,16 +1,35 @@
+'use client'
 import { getProducts } from './_actions'
+import { ProductListItem } from '@/components/ProductListItem'
+import styles from './Products.module.scss'
+import { Text } from '@/components/Text'
+import SearchForm from './_SearchForm'
+import { use, useState } from 'react'
+import { createQueryStrings } from '@/lib/createQueryStrings'
+import useSWR from 'swr'
+import Link from 'next/link'
 
-export default async function ProductsPage() {
-  const products = await getProducts({ limit: 10 })
+const handler = (search) =>
+  fetch(`http://localhost:5000/products?${search}`).then((res) => res.json())
+
+export default function ProductsPage() {
+  const [filters, setFilters] = useState({ limit: 20 })
+  const { data } = useSWR(createQueryStrings(filters).join(''), handler, {
+    revalidateOnFocus: false
+  })
+  console.log({ data })
+
   return (
-    <main>
-      <h1>Products</h1>
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-          </li>
+    <main className={styles.container}>
+      <Text as="p" variant="order1">
+        Products
+      </Text>
+      <SearchForm setFilters={setFilters} />
+      <ul className={styles.listContainer}>
+        {data?.map((product) => (
+          <Link href={`/products/${product.id}`} key={product.id}>
+            <ProductListItem product={product} />
+          </Link>
         ))}
       </ul>
     </main>

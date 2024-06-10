@@ -6,9 +6,9 @@ type ButtonProps = {
   variant: 'primary' | 'secondary'
 }
 
-export const Button = ({ children, onClick, variant }: ButtonProps) => {
+export const Button = ({ children, variant, ...buttonProps }: ButtonProps) => {
   return (
-    <button className={styles[variant]} onClick={onClick}>
+    <button className={styles[variant]} {...buttonProps}>
       {children}
     </button>
   )

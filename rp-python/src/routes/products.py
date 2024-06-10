@@ -3,10 +3,12 @@ from marshmallow import ValidationError
 import json
 from src.controllers.product_controller import ProductController
 from src.routes.route_schemas import ProductFilterSchema, ProductPostSchema
+from flask_cors import CORS, cross_origin
 
 products = Blueprint('products', __name__)
 
 @products.route('/products', methods=['GET'])
+@cross_origin()
 def products_get():
     print(request.args)
     schema = ProductFilterSchema()
@@ -23,6 +25,7 @@ def products_get():
 
 
 @products.route('/products/<string:product_id>', methods=['GET'])
+@cross_origin()
 def product_get_by_id(product_id: str) -> json:
     response = ProductController.get_product_by_id(product_id)
     if response is None:
@@ -30,6 +33,7 @@ def product_get_by_id(product_id: str) -> json:
     return jsonify(response)
 
 @products.route('/products/<string:product_id>', methods=['DELETE'])
+@cross_origin()
 def product_delete_by_id(product_id: str) -> json:
     response = ProductController.delete_product_by_id(product_id)
     if response is None:
@@ -37,6 +41,7 @@ def product_delete_by_id(product_id: str) -> json:
     return jsonify(response)
 
 @products.route('/products/<string:product_id>', methods=['PATCH'])
+@cross_origin()
 def product_patch_by_id(product_id: str) -> json:
     product_data = request.json
     response = ProductController.patch_product_by_id(product_id, product_data)
@@ -45,6 +50,7 @@ def product_patch_by_id(product_id: str) -> json:
     return jsonify(response)
 
 @products.route('/products', methods=['POST'])
+@cross_origin()
 def product_post() -> json:
     schema = ProductPostSchema()
     try:
