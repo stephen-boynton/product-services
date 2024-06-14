@@ -37,6 +37,21 @@ export default function SearchForm({ setFilters }) {
             ]}
           />
         </div>
+        <div>
+          <Select
+            label="Sort by"
+            customStyles={styles.select}
+            {...register('sort')}
+            options={[
+              // 'product', 'price', 'isOnSale', 'stock', 'sale_discount', 'sale_date_end'
+              { label: 'Price', value: 'price' },
+              { label: 'Name', value: 'product' },
+              { label: 'Stock', value: 'stock' },
+              { label: 'Sale Discount', value: 'sale_discount' },
+              { label: 'Sale Date End', value: 'sale_date_end' }
+            ]}
+          />
+        </div>
       </div>
       <Button type="submit" variant="primary">
         Search
