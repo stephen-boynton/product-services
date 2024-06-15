@@ -13,6 +13,11 @@
   color: inherit;
 }
 
+.order3 {
+  @include order-3-font;
+  color: inherit;
+}
+
 .copy1 {
   @include copy-1-font;
   color: inherit;

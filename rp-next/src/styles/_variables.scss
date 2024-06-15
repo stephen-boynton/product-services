@@ -40,6 +40,12 @@ $font-size-sm: 0.875rem;
   font-style: italic;
 }
 
+@mixin order-3-font {
+  font-size: $font-size-base;
+  font-family: $font-family-order;
+  font-weight: bold;
+}
+
 @mixin copy-1-font {
   font-size: $font-size-base;
   font-family: $font-family-sans-serif;

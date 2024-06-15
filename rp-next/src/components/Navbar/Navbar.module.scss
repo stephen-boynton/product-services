@@ -1,0 +1,19 @@
+.container {
+  padding: 0 2rem;
+  width: 100%;
+  background-color: #0f0f0f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+
+  >:not(:last-child) {
+    margin-right: 1rem;
+  }
+}

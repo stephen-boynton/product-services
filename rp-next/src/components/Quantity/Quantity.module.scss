@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+
+  &.compact {
+    font-size: 0.5rem;
+    padding: 0;
+  }
+
+  &.full {
+    font-size: 1rem;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+}
+
+
+
+.quantity {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+}

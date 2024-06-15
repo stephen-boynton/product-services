@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  align-items: stretch;
+}
+
+.actionArea {
+  display: flex;
+  flex-direction: column;
+  background-color: #0f181b;
+  padding: 2rem 5rem;
+
+  >:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.titleBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.price {}
+
+.priceBlock {
+  text-align: left;
+  display: flex;
+  padding: 1rem 0;
+  border-radius: 0.25rem;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.strike {
+  text-decoration: line-through;
+  color: red;
+  margin-left: 1rem;
+}
+
+.salePrice {
+  font-weight: bold;
+  text-align: left;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  >:not(:last-child) {
+    margin-right: 1rem;
+  }
+}

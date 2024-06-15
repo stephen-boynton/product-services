@@ -21,3 +21,13 @@ export async function getProducts(filters: Partial<FiltersOptions> = {}) {
 
   return data.json()
 }
+
+export async function getProduct(id: string) {
+  const data = await fetch(`http://rp-python:5000/products/${id}`)
+
+  if (!data.ok) {
+    throw new Error('Failed to fetch product')
+  }
+
+  return data.json()
+}
