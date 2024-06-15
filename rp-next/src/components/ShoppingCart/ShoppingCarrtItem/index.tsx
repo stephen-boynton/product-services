@@ -1,12 +1,11 @@
-// a compact shopping cart list item component
 import styles from './ShoppingCartItem.module.scss'
 import { Text } from '@/components/Text'
 import { Button } from '@/components/Button'
 import { Quantity } from '@/components/Quantity'
-import { FaTrash } from 'react-icons/fa'
 import { Image } from '@/components/Image'
 
-export const ShoppingCartItem = ({ item, value, quantity }) => {
+export const ShoppingCartItem = ({ item, value, quantity, handlers }) => {
+  console.log('item', item)
   return (
     <li key={item.id} className={styles.container}>
       <Image
@@ -28,14 +27,14 @@ export const ShoppingCartItem = ({ item, value, quantity }) => {
         <Button
           variant="text"
           size="small"
-          onClick={() => value.removeItem(item.id)}
+          onClick={() => handlers.handleRemove(item.id)}
         >
           Remove
         </Button>
         <Quantity
           variant="compact"
-          item={item}
-          value={value}
+          handleDecrement={() => handlers.handleDecrement(item.id)}
+          handleIncrement={() => handlers.handleIncrement(item.id)}
           quantity={quantity}
         />
       </div>

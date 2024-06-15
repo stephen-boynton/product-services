@@ -8,14 +8,26 @@ import { Quantity } from '@/components/Quantity'
 import { useState } from 'react'
 import { StarRating } from '@/components/StarRating'
 import { Bookmark } from '@/components/Bookmark'
+import { useDispatch } from 'react-redux'
+import { addItem } from '@/store/cart'
 
 export const ItemHero = ({ product }) => {
   const [quantity, setQuantity] = useState(1)
+  const dispactch = useDispatch()
   const isOnSale = product.isOnSale
   const priceNumber = Number(product.price.replace('$', ''))
   const salePrice = (priceNumber - priceNumber * product.sale_discount).toFixed(
     2
   )
+
+  const handleAddToCart = () => {
+    dispactch(
+      addItem({
+        ...product,
+        quantity
+      })
+    )
+  }
   return (
     <div className={styles.container}>
       <Image src={product.image} alt={product.name} width={500} height={400} />
@@ -46,7 +58,7 @@ export const ItemHero = ({ product }) => {
             min={1}
             max={product.stock}
           />
-          <Button size="medium" onClick={() => {}} variant="primary">
+          <Button size="medium" onClick={handleAddToCart} variant="primary">
             Add to Cart
           </Button>
         </div>

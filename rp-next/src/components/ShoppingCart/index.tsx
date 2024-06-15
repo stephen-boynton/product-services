@@ -1,20 +1,37 @@
 'use client'
 import { FaShoppingCart } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import styles from './ShoppingCart.module.scss'
 import { Text } from '../Text'
 import { Button } from '../Button'
-import { Quantity } from '../Quantity'
 import { useState } from 'react'
-import { Dropdown } from '../Dropdown'
 import { ShoppingCartItem } from './ShoppingCarrtItem'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
+import { decrement, increment, removeItem } from '@/store/cart'
 
 export const ShoppingCart = ({ isOpen, onClose }) => {
   const cart = useSelector((state: RootState) => state.cart)
-  const [quantity, setQuantity] = useState(1)
+  const dispatch = useDispatch()
+  const handleRemove = (id) => {
+    dispatch(removeItem(id))
+  }
+
+  const handleIncrement = (id) => {
+    dispatch(increment(id))
+  }
+
+  const handleDecrement = (id) => {
+    dispatch(decrement(id))
+  }
+
+  const handlers = {
+    handleRemove,
+    handleIncrement,
+    handleDecrement
+  }
+
   return (
     <Drawer
       open={isOpen}
@@ -32,7 +49,8 @@ export const ShoppingCart = ({ isOpen, onClose }) => {
             <ShoppingCartItem
               key={item.product}
               item={item}
-              quantity={quantity}
+              quantity={item.quantity}
+              handlers={handlers}
             />
           ))}
         </ul>

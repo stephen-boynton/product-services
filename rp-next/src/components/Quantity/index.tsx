@@ -6,7 +6,8 @@ import { FaPlus, FaMinus } from 'react-icons/fa6'
 
 type QuantityProps = {
   quantity: number
-  setQuantity: (quantity: number) => void
+  handleIncrement: () => void
+  handleDecrement: () => void
   min?: number
   max?: number
   variant?: 'full' | 'compact'
@@ -14,20 +15,12 @@ type QuantityProps = {
 
 export function Quantity({
   quantity = 1,
-  setQuantity,
+  handleIncrement,
+  handleDecrement,
   min,
   max,
   variant = 'full'
 }: QuantityProps) {
-  const handleIncrement = () => {
-    if (quantity === max) return
-    setQuantity(quantity + 1)
-  }
-  const handleDecrement = () => {
-    if (quantity === min) return
-    setQuantity(quantity - 1)
-  }
-
   return (
     <div className={cn(styles.container, styles[variant])}>
       <div className={styles.buttonContainer}>
