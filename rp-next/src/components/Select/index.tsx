@@ -1,5 +1,3 @@
-// a generic Select dropdown component that can be used in any form
-
 import React from 'react'
 import styles from './Select.module.scss'
 import cn from 'classnames'

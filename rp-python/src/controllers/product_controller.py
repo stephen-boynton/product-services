@@ -8,45 +8,54 @@ class ProductController:
     def get_all_products(filters: dict) -> list[dict]:
         try:
             from ..models.Product import Product
-            return_data = Product.query.all()
+            products_query = Product.query
             is_sale = filters.get('is_sale')
+            if is_sale is not None:
+                products_query = products_query.filter(Product.isOnSale == is_sale)
+                
             sort = filters.get('sort')
-            limit = filters.get('limit')
-            page = filters.get('page')
-            page_size = filters.get('page_size')
-            sort_order = filters.get('sort_order')
-            query = filters.get('query')
-
-            if query is not None:
-                return_data = [product for product in return_data if query.lower() in product['product'].lower()]
-
             if sort is not None:
                 if sort == 'price':
-                    ProductController.__sort_price(return_data, sort_order)
-                if sort_order == 'desc':
-                    return_data.sort(key=lambda x: x[sort], reverse=True)
-                else:
-                    return_data.sort(key=lambda x: x[sort])
-
-            if page is not None and page_size is not None:
-                start = (page - 1) * page_size
-                end = start + page_size
-                return_data = return_data[start:end]
-
-            if is_sale is not None:
-                return_data = ProductController.__get_products_by_sale(is_sale)
-
-            if limit is not None:
-                return_data = return_data[:limit]
-
-            return return_data
+                    if filters.get('sort_order') == 'desc':
+                        products_query = products_query.order_by(Product.price.desc())
+                    else:
+                        products_query = products_query.order_by(Product.price.asc())
+                elif sort == 'discount':
+                    if filters.get('sort_order') == 'desc':
+                        products_query = products_query.order_by(Product.sale_discount.desc())
+                    else:
+                        products_query = products_query.order_by(Product.sale_discount.asc())
+                elif sort == 'name':
+                    if filters.get('sort_order') == 'desc':
+                        products_query = products_query.order_by(Product.product.desc())
+                    else:
+                        products_query = products_query.order_by(Product.product.asc())
+                elif sort == 'id':
+                    if filters.get('sort_order') == 'desc':
+                        products_query = products_query.order_by(Product.id.desc())
+                    else:
+                        products_query = products_query.order_by(Product.id.asc())
+                
+            query = filters.get('query')
+            if query is not None:
+                products_query = products_query.filter(Product.name.like(f'%{query}%'))
+            
+            page = filters.get('page')
+            if page is not None:
+                page_size = filters.get('page_size')
+                products_query = products_query.offset((page - 1) * page_size).limit(page_size)
+            
+            return products_query.all()
         finally:
             from ..app import db
             db.session.close()
 
     @staticmethod
-    def get_product_by_id(product_id: str, products_data) -> Optional[dict]:
-        return None
+    def get_product_by_id(product_id: str) -> Optional[dict]:
+        from ..models.Product import Product
+        product = Product.query.get(product_id)
+        print(product)
+        return product
 
 
     @staticmethod
@@ -71,7 +80,6 @@ class ProductController:
 
     @staticmethod
     def __convert_price_to_float(price: str) -> float:
-        print(isinstance(price, str))
         num = price.replace('$', '').replace(',', '')
         # return float(num)
         return 0.0

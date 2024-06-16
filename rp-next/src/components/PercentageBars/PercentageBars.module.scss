@@ -1,0 +1,40 @@
+/* PercentageBars.css */
+.percentageBars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+}
+
+.barContainer {
+  display: flex;
+  align-items: center;
+}
+
+.barLabel {
+  /* Adjust as needed */
+  margin-right: 10px;
+}
+
+.bar {
+  flex-grow: 1;
+  height: 20px;
+  /* Adjust the height as needed */
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.barFill {
+  height: 100%;
+  background-color: #f90;
+  /* Adjust the color as needed */
+  transition: width 0.5s ease-in-out;
+}
+
+.barValue {
+  width: 40px;
+  /* Adjust as needed */
+  text-align: right;
+}

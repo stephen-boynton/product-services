@@ -1,10 +1,10 @@
 export type Product = {
   description: string
   id: string
-  image: string
-  isOnSale: boolean
-  price: string // $4.99
-  product: string
+  image_url: string
+  is_on_sale: boolean
+  price: number
+  name: string
   sale_discount: number
   sale_end_date: string
   stock: number

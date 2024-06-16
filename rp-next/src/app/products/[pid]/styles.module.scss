@@ -28,3 +28,24 @@
     margin-bottom: 1rem;
   }
 }
+
+.pageBottom {
+  display: flex;
+  align-items: flex-start;
+  padding-right: 2rem;
+
+  >:not(:last-child) {
+    margin-right: 5rem;
+  }
+}
+
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+
+  >:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}

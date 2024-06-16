@@ -14,3 +14,15 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
 }
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.cartButton {
+  display: flex;
+  align-items: center;
+}

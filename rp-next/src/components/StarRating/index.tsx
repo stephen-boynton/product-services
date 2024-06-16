@@ -8,9 +8,15 @@ export type StarRatingProps = {
   count: number
   rating: number
   voteTotal: number
+  useLabels?: boolean
 }
 
-export const StarRating = ({ count, rating, voteTotal }: StarRatingProps) => {
+export const StarRating = ({
+  count,
+  rating,
+  voteTotal,
+  useLabels = true
+}: StarRatingProps) => {
   const stars = Array.from({ length: count }, (_, index) => {
     const isFilled = index < rating
     const isHalfFilled = rating % 1 !== 0 && index === Math.floor(rating)
@@ -40,12 +46,16 @@ export const StarRating = ({ count, rating, voteTotal }: StarRatingProps) => {
   return (
     <div className={styles.container}>
       {stars}
-      <Text marginLeft={'0.5rem'} variant="copy1" as="span">
-        {rating}
-      </Text>
-      <Text marginLeft={'0.5rem'} variant="copy1" as="span">
-        ({voteTotal} ratings)
-      </Text>
+      {useLabels && (
+        <>
+          <Text marginLeft={'0.5rem'} variant="copy1" as="span">
+            {rating}
+          </Text>
+          <Text marginLeft={'0.5rem'} variant="copy1" as="span">
+            ({voteTotal} ratings)
+          </Text>
+        </>
+      )}
     </div>
   )
 }

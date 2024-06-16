@@ -47,6 +47,16 @@
   }
 }
 
+.cta {
+  @extend .baseStyles;
+  color: $color-light;
+  background-color: #44845a;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .icon {
   display: flex;
   align-items: center;

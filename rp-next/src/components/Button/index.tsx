@@ -4,7 +4,7 @@ import cn from 'classnames'
 type ButtonProps = {
   children: React.ReactNode
   onClick: () => void
-  variant: 'primary' | 'secondary' | 'icon' | 'text'
+  variant: 'primary' | 'secondary' | 'icon' | 'text' | 'cta'
   size: 'extraSmall' | 'small' | 'medium' | 'large'
   icon?: React.ReactNode
 }

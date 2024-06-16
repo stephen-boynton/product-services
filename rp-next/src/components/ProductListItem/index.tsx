@@ -10,19 +10,19 @@ const truncate = (text: string, length: number) => {
 const parsePrice = (price: string) => Number(price.split('$')[1])
 
 export const ProductListItem = ({ product }: { product: Product }) => {
-  const hasSale = product.isOnSale
+  const hasSale = product.is_on_sale
   const parsedPrice = parsePrice(product.price)
   const salePrice = parsedPrice - parsedPrice * (product.sale_discount / 100)
   return (
     <li className={styles.container}>
       <Image
-        src={product.image}
+        src={product.image_url}
         alt={product.description}
         width={100}
         height={100}
       />
       <div>
-        <h2>{product.product}</h2>
+        <h2>{product.name}</h2>
         <p
           className={cn(styles.price, { [styles.sale]: hasSale })}
         >{`${product.price}`}</p>

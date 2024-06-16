@@ -10,11 +10,12 @@ import { StarRating } from '@/components/StarRating'
 import { Bookmark } from '@/components/Bookmark'
 import { useDispatch } from 'react-redux'
 import { addItem } from '@/store/cart'
+import { Product } from '@/types/product'
 
-export const ItemHero = ({ product }) => {
+export const ItemHero = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1)
   const dispactch = useDispatch()
-  const isOnSale = product.isOnSale
+  const isOnSale = product.is_on_sale
   const priceNumber = Number(product.price.replace('$', ''))
   const salePrice = (priceNumber - priceNumber * product.sale_discount).toFixed(
     2
@@ -30,7 +31,12 @@ export const ItemHero = ({ product }) => {
   }
   return (
     <div className={styles.container}>
-      <Image src={product.image} alt={product.name} width={500} height={400} />
+      <Image
+        src={product.image_url}
+        alt={product.name}
+        width={500}
+        height={400}
+      />
       <div className={styles.actionArea}>
         <div className={styles.titleBlock}>
           <Text variant="copy1" as="h3">

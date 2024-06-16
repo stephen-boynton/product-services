@@ -1,10 +1,9 @@
 'use client'
-import { getProducts } from './_actions'
 import { ProductListItem } from '@/components/ProductListItem'
 import styles from './Products.module.scss'
 import { Text } from '@/components/Text'
 import SearchForm from './_SearchForm'
-import { use, useState } from 'react'
+import { useState } from 'react'
 import { createQueryStrings } from '@/lib/createQueryStrings'
 import useSWR from 'swr'
 import Link from 'next/link'
@@ -17,7 +16,6 @@ export default function ProductsPage() {
   const { data } = useSWR(createQueryStrings(filters).join(''), handler, {
     revalidateOnFocus: false
   })
-  console.log({ data })
 
   return (
     <main className={styles.container}>

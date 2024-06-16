@@ -10,7 +10,6 @@ products_bp = Blueprint('products', __name__)
 @products_bp.route('/products', methods=['GET'])
 @cross_origin()
 def products_get():
-    print(request.args)
     schema = ProductFilterSchema()
     
     try:
@@ -29,7 +28,7 @@ def product_get_by_id(product_id: str) -> json:
     response = ProductController.get_product_by_id(product_id)
     if response is None:
         return 'Product not found', 404
-    return jsonify(response)
+    return jsonify(response.to_dict())
 
 @products_bp.route('/products/<string:product_id>', methods=['DELETE'])
 @cross_origin()

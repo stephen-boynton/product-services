@@ -9,20 +9,22 @@ import { useState } from 'react'
 import { ShoppingCartItem } from './ShoppingCarrtItem'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
-import { decrement, increment, removeItem } from '@/store/cart'
+import { CartState, decrement, increment, removeItem } from '@/store/cart'
+import { sum } from 'rambda'
 
 export const ShoppingCart = ({ isOpen, onClose }) => {
-  const cart = useSelector((state: RootState) => state.cart)
+  const cart: CartState = useSelector((state: RootState) => state.cart)
+
   const dispatch = useDispatch()
-  const handleRemove = (id) => {
+  const handleRemove = (id: string) => {
     dispatch(removeItem(id))
   }
 
-  const handleIncrement = (id) => {
+  const handleIncrement = (id: string) => {
     dispatch(increment(id))
   }
 
-  const handleDecrement = (id) => {
+  const handleDecrement = (id: string) => {
     dispatch(decrement(id))
   }
 
@@ -44,16 +46,27 @@ export const ShoppingCart = ({ isOpen, onClose }) => {
         <Text variant="order1" as="p" className={styles.price}>
           Cart
         </Text>
+        <Text variant="copy2" as="p" className={styles.count}>
+          {cart.totalItems} items
+        </Text>
         <ul className={styles.list}>
           {cart?.items.map((item) => (
             <ShoppingCartItem
-              key={item.product}
+              key={item.name}
               item={item}
               quantity={item.quantity}
               handlers={handlers}
             />
           ))}
         </ul>
+        <div className={styles.actions}>
+          <Text variant="order2" as="p" className={styles.total}>
+            Total: ${cart.totalPrice.toFixed(2)}
+          </Text>
+          <Button variant="cta" size="medium">
+            Checkout
+          </Button>
+        </div>
       </div>
     </Drawer>
   )
@@ -67,6 +80,9 @@ export const ShoppingCartButton = () => {
   }
   return (
     <div data- className={styles.cartButton}>
+      <Text variant="copy2" as="p" className={styles.label}>
+        ${cart.totalPrice.toFixed(2)}
+      </Text>
       <Button
         onClick={handleClick}
         variant="icon"
@@ -74,7 +90,7 @@ export const ShoppingCartButton = () => {
         icon={<FaShoppingCart />}
         aria-label="Shopping cart"
       >
-        <span className={styles.count}>{cart?.items.length}</span>
+        <span className={styles.count}>{cart.totalItems}</span>
       </Button>
       <ShoppingCart isOpen={isOpen} onClose={handleClick} />
     </div>

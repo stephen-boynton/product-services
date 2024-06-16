@@ -1,0 +1,25 @@
+.pageBottom {
+  display: flex;
+  align-items: flex-start;
+  padding-right: 2rem;
+
+  >:not(:last-child) {
+    margin-right: 5rem;
+  }
+}
+
+.reviewContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+
+  >:first-child {
+    width: 20%;
+    min-width: 160px;
+  }
+
+  >:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,7 +1,7 @@
 // setup redux using redux-toolkit and redux-persist
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import storage from './storage'
 import rootReducer from './rootReducer'
 import { addItem, decrement, increment, removeItem } from './cart'
 
