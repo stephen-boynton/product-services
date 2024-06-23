@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE IF NOT EXISTS products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -23,3 +25,22 @@ COPY products (
     sale_date_end
 )
 FROM '/docker-entrypoint-initdb.d/data.csv' DELIMITER ',' CSV HEADER;
+
+CREATE TABLE IF NOT EXISTS reviews (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id UUID NOT NULL,
+    product_id INTEGER NOT NULL,
+    rating INTEGER NOT NULL,
+    review TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+COPY reviews (
+    product_id,
+    user_id,
+    rating,
+    review
+)
+
+FROM '/docker-entrypoint-initdb.d/reviews.csv' DELIMITER ',' CSV HEADER;

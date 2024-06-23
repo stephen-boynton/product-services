@@ -68,6 +68,7 @@ services:
     volumes:
       - ./load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
       - ./data.csv:/docker-entrypoint-initdb.d/data.csv
+      - ./reviews.csv:/docker-entrypoint-initdb.d/reviews.csv
     networks:
       - fullstack-network
 

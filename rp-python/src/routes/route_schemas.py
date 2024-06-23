@@ -39,3 +39,10 @@ class ProductPostSchema(Schema):
     sale_discount = fields.Float(required=True)
     stock = fields.Integer(required=True)
     
+    
+class ReviewPostSchema(Schema):
+    rating = fields.Integer(required=True, validate=validate.Range(min=1, max=5))
+    product_id = fields.String(required=True)
+    user_id = fields.String(required=True)
+    review = fields.String()
+    
