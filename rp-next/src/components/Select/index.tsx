@@ -6,13 +6,12 @@ type SelectProps = {
   options: { label: string; value: string }[]
   label: string
   value: string
-  customStyles: string
+  customStyles?: string
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 export const Select: React.FC<SelectProps> = React.forwardRef(
   ({ options, label, value, customStyles = '', onChange, ...props }, ref) => {
-    console.log({ options, label, value, customStyles, onChange, props })
     return (
       <div className={cn([styles.container, customStyles])}>
         <label className={styles.label}>{label}</label>

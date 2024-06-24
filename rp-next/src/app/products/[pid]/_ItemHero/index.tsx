@@ -21,10 +21,13 @@ export const ItemHero = ({ product }: { product: Product }) => {
     2
   )
 
+  console.log({ salePrice })
+
   const handleAddToCart = () => {
     dispactch(
       addItem({
         ...product,
+        salePrice,
         quantity
       })
     )

@@ -31,3 +31,19 @@ export async function getProduct(id: string) {
 
   return data.json()
 }
+
+export async function getReviews(id: string) {
+  const data = await fetch(`http://rp-python:5000/reviews/product/${id}`)
+
+  if (!data.ok) {
+    throw new Error('Failed to fetch reviews')
+  }
+
+  return data.json()
+}
+
+export async function getProductAndReviews(id: string) {
+  const [product, reviews] = await Promise.all([getProduct(id), getReviews(id)])
+
+  return { product, reviews }
+}

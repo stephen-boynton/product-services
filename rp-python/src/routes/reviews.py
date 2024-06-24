@@ -9,14 +9,6 @@ reviews_bp = Blueprint('reviews', __name__)
 
 @reviews_bp.route('/reviews/product/<string:product_id>', methods=['GET'])
 @cross_origin()
-def reviews_by_product():
-    schema = ReviewPostSchema()
-    
-    try:
-        schema.load(request.args)
-    except ValidationError as e:
-        return e.messages, 400
-
-    response = ReviewsController.get_reviews_by_product_id(schema.dump(request.args))
-    
-    return jsonify([review.to_dict() for review in response])
+def reviews_by_product(product_id: str) -> json:
+    response = ReviewsController.get_reviews_by_product_id(product_id)
+    return jsonify(response)
