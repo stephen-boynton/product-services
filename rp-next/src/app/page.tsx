@@ -6,7 +6,8 @@ import { Form } from '@/components/Form'
 const MY_INPUTS = [
   { type: 'text', name: 'first name', label: 'first name' },
   { type: 'text', name: 'last name', label: 'last name' },
-  { type: 'email', name: 'email', label: 'email' }
+  { type: 'email', name: 'email', label: 'email' },
+  { type: 'file', name: 'avatar', label: 'avatar' }
 ]
 
 export default function Home() {
