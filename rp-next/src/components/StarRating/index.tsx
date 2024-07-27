@@ -1,4 +1,4 @@
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
+import { FaStar } from 'react-icons/fa'
 import { FaStarHalfStroke, FaRegStar } from 'react-icons/fa6'
 import cn from 'classnames'
 import styles from './StarRating.module.scss'

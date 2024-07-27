@@ -1,11 +1,11 @@
 import styles from './Button.module.scss'
 import cn from 'classnames'
 
-type ButtonProps = {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
   onClick: () => void
   variant: 'primary' | 'secondary' | 'icon' | 'text' | 'cta'
-  size: 'extraSmall' | 'small' | 'medium' | 'large'
+  size?: 'extraSmall' | 'small' | 'medium' | 'large'
   icon?: React.ReactNode
 }
 

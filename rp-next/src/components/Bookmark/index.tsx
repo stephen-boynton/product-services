@@ -1,7 +1,6 @@
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa'
 import styles from './Bookmark.module.scss'
 import { toast } from 'react-hot-toast'
-// create a component that allows you to toggle these bookmark icons on and off
 
 import { useState } from 'react'
 

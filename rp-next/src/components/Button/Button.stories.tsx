@@ -2,6 +2,8 @@ import { Button } from '.'
 import { StoryObj, Meta } from '@storybook/react'
 import { Text } from '../Text'
 import { fn } from '@storybook/test'
+import { Fa0 } from 'react-icons/fa6'
+import { FaSass } from 'react-icons/fa'
 
 const meta = {
   title: 'Base Components/Button',
@@ -32,5 +34,14 @@ export const Secondary: Story = {
     ),
     onClick: fn(),
     variant: 'secondary'
+  }
+}
+
+export const Icon: Story = {
+  args: {
+    children: <FaSass />,
+    onClick: fn(),
+    variant: 'icon',
+    size: 'small'
   }
 }
