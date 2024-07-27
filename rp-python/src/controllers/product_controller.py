@@ -27,9 +27,9 @@ class ProductController:
                         products_query = products_query.order_by(Product.sale_discount.asc())
                 elif sort == 'name':
                     if filters.get('sort_order') == 'desc':
-                        products_query = products_query.order_by(Product.product.desc())
+                        products_query = products_query.order_by(Product.name.desc())
                     else:
-                        products_query = products_query.order_by(Product.product.asc())
+                        products_query = products_query.order_by(Product.name.asc())
                 elif sort == 'id':
                     if filters.get('sort_order') == 'desc':
                         products_query = products_query.order_by(Product.id.desc())

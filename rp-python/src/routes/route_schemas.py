@@ -3,7 +3,7 @@ from marshmallow import Schema, fields, ValidationError, validate, validates_sch
 from datetime import datetime
 
 sortable_fields: list[str] = [
-    'product', 'price', 'isOnSale', 'stock', 'sale_discount', 'sale_date_end' 
+    'name', 'price', 'isOnSale', 'stock', 'sale_discount', 'sale_date_end' 
     ]
 
 def validate_date_format(date_str: str):
